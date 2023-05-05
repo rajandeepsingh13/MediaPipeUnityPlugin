@@ -65,8 +65,8 @@ jobs:
             --mount type=bind,src=$PWD/Packages,dst=/home/mediapipe/Packages \
             --mount type=bind,src=$PWD/Assets,dst=/home/mediapipe/Assets \
             mediapipe_unity:latest \
-            python build.py build --bazel_build_opts "--experimental_scale_timeouts=10.0 --http_timeout_scaling=10.0" --android arm64 --android_ndk_api_level 21 --linkopt=-s -vv
-
+            python build.py build --bazel_build_opts "${{ inputs.bazelBuildArgs }}" ${{ inputs.linuxBuildArgs }} -vv
+            
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
